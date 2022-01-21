@@ -1,0 +1,1230 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PactNet</name>
+    </assembly>
+    <members>
+        <member name="T:PactNet.ConsumerContext">
+            <summary>
+            Context for consumer interaction verification
+            </summary>
+        </member>
+        <member name="P:PactNet.ConsumerContext.MockServerUri">
+            <summary>
+            URI for the mock server
+            </summary>
+        </member>
+        <member name="T:PactNet.IMessageMockServer">
+            <summary>
+            Mock server
+            </summary>
+        </member>
+        <member name="M:PactNet.IMessageMockServer.WriteMessagePactFile(PactNet.Interop.MessagePactHandle,System.String,System.Boolean)">
+            <summary>
+            Write the message pact message file
+            </summary>
+            <param name="pact">the message pact</param>
+            <param name="directory">the output folder</param>
+            <param name="overwrite">overwrite</param>
+            <returns></returns>
+        </member>
+        <member name="M:PactNet.IMessageMockServer.WithMessagePactMetadata(PactNet.Interop.MessagePactHandle,System.String,System.String,System.String)">
+            <summary>
+            Add metadata to the message message pact
+            </summary>
+            <param name="pact">the message pact message handle</param>
+            <param name="namespace">the namespace</param>
+            <param name="name">the name of the parameter</param>
+            <param name="value">the value of the parameter</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMessageMockServer.NewMessagePact(System.String,System.String)">
+            <summary>
+            Create a new message pact
+            </summary>
+            <param name="consumerName">Consumer name</param>
+            <param name="providerName">Provider name</param>
+            <returns>Pact handle</returns>
+        </member>
+        <member name="M:PactNet.IMessageMockServer.NewMessage(PactNet.Interop.MessagePactHandle,System.String)">
+            <summary>
+            Create a new message on the given message pact
+            </summary>
+            <param name="pact">Pact handle</param>
+            <param name="description">Interaction description</param>
+            <returns></returns>
+        </member>
+        <member name="M:PactNet.IMessageMockServer.ExpectsToReceive(PactNet.Interop.MessageHandle,System.String)">
+            <summary>
+            Set the description of the message description
+            </summary>
+            <param name="message">message</param>
+            <param name="description">message description</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMessageMockServer.Given(PactNet.Interop.MessageHandle,System.String)">
+            <summary>
+            Add a provider state to the message
+            </summary>
+            <param name="message">message</param>
+            <param name="description">Provider state description</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMessageMockServer.GivenWithParam(PactNet.Interop.MessageHandle,System.String,System.String,System.String)">
+            <summary>
+            Add a provider state with a parameter to the interaction
+            </summary>
+            <param name="message">message</param>
+            <param name="description">Provider state description</param>
+            <param name="name">Parameter name</param>
+            <param name="value">Parameter value</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMessageMockServer.WithMetadata(PactNet.Interop.MessageHandle,System.String,System.String)">
+            <summary>
+            Set the metadata of the message
+            </summary>
+            <param name="message">message</param>
+            <param name="key">the key</param>
+            <param name="value">the value</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMessageMockServer.WithContents(PactNet.Interop.MessageHandle,System.String,System.String,System.UInt32)">
+            <summary>
+            Set the contents of the message
+            </summary>
+            <param name="message">message</param>
+            <param name="contentType">the content type</param>
+            <param name="body">the body of the message</param>
+            <param name="size">the size of the message</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMessageMockServer.Reify(PactNet.Interop.MessageHandle)">
+            <summary>
+            Returns the message without the matchers
+            </summary>
+            <param name="message">message</param>
+            <returns>Success</returns>
+        </member>
+        <member name="T:PactNet.IMockServer">
+            <summary>
+            Mock server
+            </summary>
+        </member>
+        <member name="M:PactNet.IMockServer.CreateMockServerForPact(PactNet.Interop.PactHandle,System.String,System.Boolean)">
+            <summary>
+            Create the mock server for the given pact handle
+            </summary>
+            <param name="pact">Pact handle</param>
+            <param name="addrStr">Host and port for the mock server</param>
+            <param name="tls">Enable TLS</param>
+            <returns>Mock server port</returns>
+            <exception cref="T:System.InvalidOperationException">Failed to start mock server</exception>
+        </member>
+        <member name="M:PactNet.IMockServer.MockServerMismatches(System.Int32)">
+            <summary>
+            Get a string representing the mismatches following interaction testing
+            </summary>
+            <param name="mockServerPort">Mock server port</param>
+            <returns>Mismatch string</returns>
+        </member>
+        <member name="M:PactNet.IMockServer.MockServerLogs(System.Int32)">
+            <summary>
+            Get a string representing the mock server logs following interaction testing
+            </summary>
+            <param name="mockServerPort">Mock server port</param>
+            <returns>Log string</returns>
+        </member>
+        <member name="M:PactNet.IMockServer.CleanupMockServer(System.Int32)">
+            <summary>
+            Clean up the mock server following consumer testing
+            </summary>
+            <param name="mockServerPort">Mock server port</param>
+            <returns>Cleanup successful</returns>
+        </member>
+        <member name="M:PactNet.IMockServer.WritePactFile(System.Int32,System.String,System.Boolean)">
+            <summary>
+            Write the pact file to disk
+            </summary>
+            <param name="mockServerPort">Mock server port</param>
+            <param name="directory">Directory of the pact file</param>
+            <param name="overwrite">Overwrite the existing pact file?</param>
+            <returns>Status code</returns>
+            <exception cref="T:System.InvalidOperationException">Failed to write pact file</exception>
+        </member>
+        <member name="M:PactNet.IMockServer.NewPact(System.String,System.String)">
+            <summary>
+            Create a new pact
+            </summary>
+            <param name="consumerName">Consumer name</param>
+            <param name="providerName">Provider name</param>
+            <returns>Pact handle</returns>
+        </member>
+        <member name="M:PactNet.IMockServer.WithSpecification(PactNet.Interop.PactHandle,PactNet.Interop.PactSpecification)">
+            <summary>
+            Set the pact specification version
+            </summary>
+            <param name="pact">Pact handle</param>
+            <param name="version">Specification version</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMockServer.NewInteraction(PactNet.Interop.PactHandle,System.String)">
+            <summary>
+            Create a new interaction on the given pact
+            </summary>
+            <param name="pact">Pact handle</param>
+            <param name="description">Interaction description</param>
+            <returns></returns>
+        </member>
+        <member name="M:PactNet.IMockServer.Given(PactNet.Interop.InteractionHandle,System.String)">
+            <summary>
+            Add a provider state to the interaction
+            </summary>
+            <param name="interaction">Interaction</param>
+            <param name="description">Provider state description</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMockServer.GivenWithParam(PactNet.Interop.InteractionHandle,System.String,System.String,System.String)">
+            <summary>
+            Add a provider state with a parameter to the interaction
+            </summary>
+            <param name="interaction">Interaction</param>
+            <param name="description">Provider state description</param>
+            <param name="name">Parameter name</param>
+            <param name="value">Parameter value</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMockServer.WithRequest(PactNet.Interop.InteractionHandle,System.String,System.String)">
+            <summary>
+            Add a request to the interaction
+            </summary>
+            <param name="interaction">Interaction</param>
+            <param name="method">Request method</param>
+            <param name="path">Request path</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMockServer.WithQueryParameter(PactNet.Interop.InteractionHandle,System.String,System.String,System.UInt32)">
+            <summary>
+            Add a query string parameter to the interaction
+            </summary>
+            <param name="interaction">Interaction</param>
+            <param name="name">Query string parameter name</param>
+            <param name="value">Parameter value</param>
+            <param name="index">Parameter index (for if the same name is used multiple times)</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMockServer.WithRequestHeader(PactNet.Interop.InteractionHandle,System.String,System.String,System.UInt32)">
+            <summary>
+            Set a request header
+            </summary>
+            <param name="interaction">Interaction</param>
+            <param name="name">header name</param>
+            <param name="value">Header value</param>
+            <param name="index">Header index (for if the same header is added multiple times)</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMockServer.WithResponseHeader(PactNet.Interop.InteractionHandle,System.String,System.String,System.UInt32)">
+            <summary>
+            Set a response header
+            </summary>
+            <param name="interaction">Interaction</param>
+            <param name="name">header name</param>
+            <param name="value">Header value</param>
+            <param name="index">Header index (for if the same header is added multiple times)</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMockServer.ResponseStatus(PactNet.Interop.InteractionHandle,System.UInt16)">
+            <summary>
+            Set the response status
+            </summary>
+            <param name="interaction">Interaction</param>
+            <param name="status">Status code</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMockServer.WithRequestBody(PactNet.Interop.InteractionHandle,System.String,System.String)">
+            <summary>
+            Set the request body
+            </summary>
+            <param name="interaction">Interaction</param>
+            <param name="contentType">Context type</param>
+            <param name="body">Serialised body</param>
+            <returns>Success</returns>
+        </member>
+        <member name="M:PactNet.IMockServer.WithResponseBody(PactNet.Interop.InteractionHandle,System.String,System.String)">
+            <summary>
+            Set the response body
+            </summary>
+            <param name="interaction">Interaction</param>
+            <param name="contentType">Context type</param>
+            <param name="body">Serialised body</param>
+            <returns>Success</returns>
+        </member>
+        <member name="T:PactNet.Internal.Guard">
+            <summary>
+            Guard methods
+            </summary>
+        </member>
+        <member name="M:PactNet.Internal.Guard.NotNullOrEmpty(System.String,System.String)">
+            <summary>
+            Ensures a string is not null or empty
+            </summary>
+            <param name="value">String value to check</param>
+            <param name="name">Original variable name</param>
+            <exception cref="T:System.ArgumentException">Value was null or empty</exception>
+        </member>
+        <member name="M:PactNet.Internal.Guard.NotNull(System.Object,System.String)">
+            <summary>
+            Ensures a value is not null
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="name">Original variable name</param>
+        </member>
+        <member name="T:PactNet.Interop.NativeInterop">
+            <summary>
+            Interop definitions to the Pact FFI library
+            </summary>
+        </member>
+        <member name="M:PactNet.Interop.NativeInterop.#cctor">
+            <summary>
+            Static initialiser for the Pact FFI library
+            </summary>
+        </member>
+        <member name="T:PactNet.MessageBuilder">
+            <summary>
+            Mock request message builder
+            </summary>
+        </member>
+        <member name="M:PactNet.MessageBuilder.#ctor(PactNet.IMessageMockServer,PactNet.Interop.MessageHandle,Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Initialises a new instance of the <see cref="T:PactNet.MessagePactBuilder"/> class.
+            </summary>
+            <param name="server">Mock server</param>
+            <param name="message">Message handle</param>
+            <param name="defaultSettings">Default JSON serialiser settings</param>
+        </member>
+        <member name="M:PactNet.MessageBuilder.PactNet#IMessageBuilderV3#Given(System.String)">
+            <inheritdoc cref="T:PactNet.IMessageBuilderV3"/>
+        </member>
+        <member name="M:PactNet.MessageBuilder.PactNet#IMessageBuilderV3#Given(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <inheritdoc cref="T:PactNet.IMessageBuilderV3"/>
+        </member>
+        <member name="M:PactNet.MessageBuilder.PactNet#IMessageBuilderV3#WithMetadata(System.String,System.String)">
+            <inheritdoc cref="T:PactNet.IMessageBuilderV3"/>
+        </member>
+        <member name="M:PactNet.MessageBuilder.PactNet#IMessageBuilderV3#WithJsonContent(System.Object)">
+            <inheritdoc cref="T:PactNet.IMessageBuilderV3"/>
+        </member>
+        <member name="M:PactNet.MessageBuilder.PactNet#IMessageBuilderV3#WithJsonContent(System.Object,Newtonsoft.Json.JsonSerializerSettings)">
+            <inheritdoc cref="T:PactNet.IMessageBuilderV3"/>
+        </member>
+        <member name="M:PactNet.MessageBuilder.Given(System.String)">
+            <summary>
+            Add a provider state
+            </summary>
+            <param name="providerState">Provider state description</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.MessageBuilder.Given(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Add a provider state with one or more parameters
+            </summary>
+            <param name="providerState">Provider state description</param>
+            <param name="parameters">Provider state parameters</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.MessageBuilder.WithMetadata(System.String,System.String)">
+            <summary>
+            Set the metadata
+            </summary>
+            <param name="key">key of the metadata</param>
+            <param name="value">value of the metadata</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.MessageBuilder.WithJsonContent(System.Object)">
+            <summary>
+            Set a body which is serialised as JSON
+            </summary>
+            <param name="body">Request body</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.MessageBuilder.WithJsonContent(System.Object,Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Set a body which is serialised as JSON
+            </summary>
+            <param name="body">Request body</param>
+            <param name="settings">Custom JSON serializer settings</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="T:PactNet.MessagePactBuilder">
+            <summary>
+            Mock request builder
+            </summary>
+        </member>
+        <member name="M:PactNet.MessagePactBuilder.#ctor(PactNet.IMessageMockServer,PactNet.Interop.MessagePactHandle,PactNet.PactConfig)">
+            <summary>
+            Initialises a new instance of the <see cref="T:PactNet.MessagePactBuilder"/> class.
+            </summary>
+            <param name="server">Mock server</param>
+            <param name="pact">the message pact handle</param>
+            <param name="config">the message pact configuration</param>
+        </member>
+        <member name="M:PactNet.MessagePactBuilder.PactNet#IMessagePactBuilderV3#ExpectsToReceive(System.String)">
+            <inheritdoc cref="T:PactNet.IMessagePactBuilderV3"/>
+        </member>
+        <member name="M:PactNet.MessagePactBuilder.PactNet#IMessagePactBuilderV3#WithPactMetadata(System.String,System.String,System.String)">
+            <inheritdoc cref="T:PactNet.IMessagePactBuilderV3"/>
+        </member>
+        <member name="M:PactNet.MessagePactBuilder.ExpectsToReceive(System.String)">
+            <summary>
+            Add a new message to the message pact
+            </summary>
+            <param name="description">Message description</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.MessagePactBuilder.WithPactMetadata(System.String,System.String,System.String)">
+            <summary>
+            Add a new metadata to the message pact
+            </summary>
+            <param name="namespace">the parent configuration section</param>
+            <param name="name">the metadata field value</param>
+            <param name="value">the metadata field value</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.MessagePactBuilder.Verify``1(System.Action{``0})">
+            <summary>
+            Verify a message is read and handled correctly and write the message pact
+            </summary>
+            <param name="handler">The method using the message</param>
+        </member>
+        <member name="M:PactNet.MessagePactBuilder.VerifyAsync``1(System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            Verify a message is read and handled correctly and write the message pact
+            </summary>
+            <param name="handler">The method using the message</param>
+        </member>
+        <member name="M:PactNet.MessagePactBuilder.MessageReified``1">
+            <summary>
+            Try to read the reified message
+            </summary>
+            <typeparam name="T">the type of message</typeparam>
+            <returns>the message</returns>
+        </member>
+        <member name="M:PactNet.MessagePactBuilder.WritePact">
+            <summary>
+            Write the pact file
+            </summary>
+        </member>
+        <member name="T:PactNet.MockServer">
+            <summary>
+            Native mock server
+            </summary>
+        </member>
+        <member name="T:PactNet.Models.NativeMessage">
+            <summary>
+            Placeholder for native message from backend
+            </summary>
+        </member>
+        <member name="P:PactNet.Models.NativeMessage.Contents">
+            <summary>
+            The content
+            </summary>
+        </member>
+        <member name="P:PactNet.Models.NativeMessage.Description">
+            <summary>
+            The description
+            </summary>
+        </member>
+        <member name="T:PactNet.PactBuilder">
+            <summary>
+            Pact builder for the native backend
+            </summary>
+        </member>
+        <member name="M:PactNet.PactBuilder.#ctor(PactNet.IMockServer,PactNet.Interop.PactHandle,PactNet.PactConfig,System.Nullable{System.Int32},PactNet.Models.IPAddress)">
+            <summary>
+            Initialises a new instance of the <see cref="T:PactNet.PactBuilder"/> class.
+            </summary>
+            <param name="server">Mock server</param>
+            <param name="pact">Pact handle</param>
+            <param name="config">Pact config</param>
+            <param name="port">Optional port, otherwise one is dynamically allocated</param>
+            <param name="host">Optional host, otherwise loopback is used</param>
+        </member>
+        <member name="M:PactNet.PactBuilder.PactNet#IPactBuilderV2#UponReceiving(System.String)">
+            <summary>
+            Add a new interaction to the pact
+            </summary>
+            <param name="description">Interaction description</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.PactBuilder.PactNet#IPactBuilderV3#UponReceiving(System.String)">
+            <summary>
+            Add a new interaction to the pact
+            </summary>
+            <param name="description">Interaction description</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.PactBuilder.UponReceiving(System.String)">
+            <summary>
+            Create a new request/response interaction
+            </summary>
+            <param name="description">Interaction description</param>
+            <returns>Request builder</returns>
+        </member>
+        <member name="M:PactNet.PactBuilder.Verify(System.Action{PactNet.IConsumerContext})">
+            <summary>
+            Verify the configured interactions
+            </summary>
+            <param name="interact">Action to perform the real interactions against the mock server</param>
+            <exception cref="T:PactNet.Exceptions.PactFailureException">Failed to verify the interactions</exception>
+        </member>
+        <member name="M:PactNet.PactBuilder.VerifyAsync(System.Func{PactNet.IConsumerContext,System.Threading.Tasks.Task})">
+            <summary>
+            Verify the configured interactions
+            </summary>
+            <param name="interact">Action to perform the real interactions against the mock server</param>
+            <exception cref="T:PactNet.Exceptions.PactFailureException">Failed to verify the interactions</exception>
+        </member>
+        <member name="M:PactNet.PactBuilder.StartMockServer">
+            <summary>
+            Start the mock server
+            </summary>
+            <returns>Mock server URI</returns>
+        </member>
+        <member name="M:PactNet.PactBuilder.VerifyInternal(System.Uri)">
+            <summary>
+            Verify the interactions after the consumer client has been invoked
+            </summary>
+        </member>
+        <member name="M:PactNet.PactBuilder.PrintLogs(System.Uri)">
+            <summary>
+            Print logs to the configured outputs
+            </summary>
+            <param name="uri">Mock server URI</param>
+        </member>
+        <member name="T:PactNet.PactExtensions">
+            <summary>
+            Extensions for <see cref="T:PactNet.Pact"/>
+            </summary>
+        </member>
+        <member name="M:PactNet.PactExtensions.UsingNativeBackend(PactNet.IPactV2,System.Nullable{System.Int32},PactNet.Models.IPAddress)">
+            <summary>
+            Establish a new pact using the native backend
+            </summary>
+            <param name="pact">Pact details</param>
+            <param name="port">Port for the mock server. If null, one will be assigned automatically</param>
+            <param name="host">Host for the mock server</param>
+            <returns>Pact builder</returns>
+            <remarks>
+            If multiple mock servers are started at the same time, you must make sure you don't supply the same port twice.
+            It is advised that the port is not specified whenever possible to allow PactNet to allocate a port dynamically
+            and ensure there are no port clashes
+            </remarks>
+        </member>
+        <member name="M:PactNet.PactExtensions.UsingNativeBackend(PactNet.IPactV3,System.Nullable{System.Int32},PactNet.Models.IPAddress)">
+            <summary>
+            Establish a new pact using the native backend
+            </summary>
+            <param name="pact">Pact details</param>
+            <param name="port">Port for the mock server. If null, one will be assigned automatically</param>
+            <param name="host">Host for the mock server</param>
+            <returns>Pact builder</returns>
+            <remarks>
+            If multiple mock servers are started at the same time, you must make sure you don't supply the same port twice.
+            It is advised that the port is not specified whenever possible to allow PactNet to allocate a port dynamically
+            and ensure there are no port clashes
+            </remarks>
+        </member>
+        <member name="M:PactNet.PactExtensions.UsingNativeBackend(PactNet.IMessagePactV3)">
+            <summary>
+            Establish a new message pact using the native backend
+            </summary>
+            <param name="messagePact">Message Pact details</param>
+            <returns>Pact builder</returns>
+        </member>
+        <member name="M:PactNet.PactExtensions.InitialiseServer(PactNet.MockServer,PactNet.IPact,PactNet.Interop.PactSpecification)">
+            <summary>
+            Initialise a new pact on the server with the correct version
+            </summary>
+            <param name="pact">Pact details</param>
+            <param name="server">Server</param>
+            <param name="version">Spec version</param>
+            <returns>Initialised pact handle</returns>
+        </member>
+        <member name="M:PactNet.PactExtensions.InitialiseMessage(PactNet.MockServer,PactNet.IMessagePact,PactNet.Interop.PactSpecification)">
+            <summary>
+            Initialise a new message pact with the correct version
+            </summary>
+            <param name="messagePact">Message Pact details</param>
+            <param name="server">Server</param>
+            <param name="version">Spec version</param>
+            <returns>Initialised message pact handle</returns>
+        </member>
+        <member name="T:PactNet.RequestBuilder">
+            <summary>
+            Mock request builder
+            </summary>
+        </member>
+        <member name="M:PactNet.RequestBuilder.#ctor(PactNet.IMockServer,PactNet.Interop.InteractionHandle,Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Initialises a new instance of the <see cref="T:PactNet.RequestBuilder"/> class.
+            </summary>
+            <param name="server">Mock server</param>
+            <param name="interaction"></param>
+            <param name="defaultSettings">Default JSON serializer settings</param>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV2#Given(System.String)">
+            <summary>
+            Add a provider state
+            </summary>
+            <param name="providerState">Provider state description</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV2#WithRequest(System.Net.Http.HttpMethod,System.String)">
+            <summary>
+            Set the request
+            </summary>
+            <param name="method">Request method</param>
+            <param name="path">Request path</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV2#WithRequest(System.String,System.String)">
+            <summary>
+            Set the request
+            </summary>
+            <param name="method">Request method</param>
+            <param name="path">Request path</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV2#WithQuery(System.String,System.String)">
+            <summary>
+            Add a query string parameter
+            </summary>
+            <param name="key">Query parameter key</param>
+            <param name="value">Query parameter value</param>
+            <returns>Fluent builder</returns>
+            <remarks>You can add a query parameter with the same key multiple times</remarks>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV2#WithHeader(System.String,System.String)">
+            <summary>
+            Add a request header
+            </summary>
+            <param name="key">Header key</param>
+            <param name="value">Header value</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV2#WithHeader(System.String,PactNet.Matchers.IMatcher)">
+            <summary>
+            Add a request header matcher
+            </summary>
+            <param name="key">Header key</param>
+            <param name="matcher">Header value matcher</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV2#WithJsonBody(System.Object)">
+            <summary>
+            Set a body which is serialised as JSON
+            </summary>
+            <param name="body">Request body</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV2#WithJsonBody(System.Object,Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Set a body which is serialised as JSON
+            </summary>
+            <param name="body">Request body</param>
+            <param name="settings">Custom JSON serializer settings</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV2#WillRespond">
+            <summary>
+            Define the response to this request
+            </summary>
+            <returns>Response builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV3#Given(System.String)">
+            <summary>
+            Add a provider state
+            </summary>
+            <param name="providerState">Provider state description</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV3#Given(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Add a provider state with one or more parameters
+            </summary>
+            <param name="providerState">Provider state description</param>
+            <param name="parameters">Provider state parameters</param>
+            <returns>Flient builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV3#WithRequest(System.Net.Http.HttpMethod,System.String)">
+            <summary>
+            Set the request
+            </summary>
+            <param name="method">Request method</param>
+            <param name="path">Request path</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV3#WithRequest(System.String,System.String)">
+            <summary>
+            Set the request
+            </summary>
+            <param name="method">Request method</param>
+            <param name="path">Request path</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV3#WithQuery(System.String,System.String)">
+            <summary>
+            Add a query string parameter
+            </summary>
+            <param name="key">Query parameter key</param>
+            <param name="value">Query parameter value</param>
+            <returns>Fluent builder</returns>
+            <remarks>You can add a query parameter with the same key multiple times</remarks>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV3#WithHeader(System.String,System.String)">
+            <summary>
+            Add a request header
+            </summary>
+            <param name="key">Header key</param>
+            <param name="value">Header value</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV3#WithHeader(System.String,PactNet.Matchers.IMatcher)">
+            <summary>
+            Add a request header matcher
+            </summary>
+            <param name="key">Header key</param>
+            <param name="matcher">Header value matcher</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV3#WithJsonBody(System.Object)">
+            <summary>
+            Set a body which is serialised as JSON
+            </summary>
+            <param name="body">Request body</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV3#WithJsonBody(System.Object,Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Set a body which is serialised as JSON
+            </summary>
+            <param name="body">Request body</param>
+            <param name="settings">Custom JSON serializer settings</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.PactNet#IRequestBuilderV3#WillRespond">
+            <summary>
+            Define the response to this request
+            </summary>
+            <returns>Response builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.Given(System.String)">
+            <summary>
+            Add a provider state
+            </summary>
+            <param name="providerState">Provider state description</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.Given(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Add a provider state with one or more parameters
+            </summary>
+            <param name="providerState">Provider state description</param>
+            <param name="parameters">Provider state parameters</param>
+            <returns>Flient builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.WithRequest(System.Net.Http.HttpMethod,System.String)">
+            <summary>
+            Set the request
+            </summary>
+            <param name="method">Request method</param>
+            <param name="path">Request path</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.WithRequest(System.String,System.String)">
+            <summary>
+            Set the request
+            </summary>
+            <param name="method">Request method</param>
+            <param name="path">Request path</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.WithQuery(System.String,System.String)">
+            <summary>
+            Add a query string parameter
+            </summary>
+            <param name="key">Query parameter key</param>
+            <param name="value">Query parameter value</param>
+            <returns>Fluent builder</returns>
+            <remarks>You can add a query parameter with the same key multiple times</remarks>
+        </member>
+        <member name="M:PactNet.RequestBuilder.WithHeader(System.String,System.String)">
+            <summary>
+            Add a request header
+            </summary>
+            <param name="key">Header key</param>
+            <param name="value">Header value</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.WithHeader(System.String,PactNet.Matchers.IMatcher)">
+            <summary>
+            Add a request header matcher
+            </summary>
+            <param name="key">Header key</param>
+            <param name="matcher">Header value matcher</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.WithJsonBody(System.Object)">
+            <summary>
+            Set a body which is serialised as JSON
+            </summary>
+            <param name="body">Request body</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.WithJsonBody(System.Object,Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Set a body which is serialised as JSON
+            </summary>
+            <param name="body">Request body</param>
+            <param name="settings">Custom JSON serializer settings</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.RequestBuilder.WillRespond">
+            <summary>
+            Define the response to this request
+            </summary>
+            <returns>Response builder</returns>
+        </member>
+        <member name="T:PactNet.ResponseBuilder">
+            <summary>
+            Mock response builder
+            </summary>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.#ctor(PactNet.IMockServer,PactNet.Interop.InteractionHandle,Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Initialises a new instance of the <see cref="T:PactNet.ResponseBuilder"/> class.
+            </summary>
+            <param name="server">Mock server</param>
+            <param name="interaction">Interaction handle</param>
+            <param name="defaultSettings">Default JSON serializer settings</param>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.PactNet#IResponseBuilderV2#WithStatus(System.Net.HttpStatusCode)">
+            <summary>
+            Set response status code
+            </summary>
+            <param name="status">Response status code</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.PactNet#IResponseBuilderV2#WithStatus(System.UInt16)">
+            <summary>
+            Set response status code
+            </summary>
+            <param name="status">Response status code</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.PactNet#IResponseBuilderV2#WithHeader(System.String,System.String)">
+            <summary>
+            Add a response header
+            </summary>
+            <param name="key">Header key</param>
+            <param name="value">Header value</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.PactNet#IResponseBuilderV2#WithHeader(System.String,PactNet.Matchers.IMatcher)">
+            <summary>
+            Add a response header matcher
+            </summary>
+            <param name="key">Header key</param>
+            <param name="matcher">Header value matcher</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.PactNet#IResponseBuilderV2#WithJsonBody(System.Object)">
+            <summary>
+            Set a body which is serialised as JSON
+            </summary>
+            <param name="body">Request body</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.PactNet#IResponseBuilderV2#WithJsonBody(System.Object,Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Set a body which is serialised as JSON
+            </summary>
+            <param name="body">Request body</param>
+            <param name="settings">Custom JSON serializer settings</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.PactNet#IResponseBuilderV3#WithStatus(System.Net.HttpStatusCode)">
+            <summary>
+            Set response status code
+            </summary>
+            <param name="status">Response status code</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.PactNet#IResponseBuilderV3#WithStatus(System.UInt16)">
+            <summary>
+            Set response status code
+            </summary>
+            <param name="status">Response status code</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.PactNet#IResponseBuilderV3#WithHeader(System.String,System.String)">
+            <summary>
+            Add a response header
+            </summary>
+            <param name="key">Header key</param>
+            <param name="value">Header value</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.PactNet#IResponseBuilderV3#WithHeader(System.String,PactNet.Matchers.IMatcher)">
+            <summary>
+            Add a response header matcher
+            </summary>
+            <param name="key">Header key</param>
+            <param name="matcher">Header value matcher</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.PactNet#IResponseBuilderV3#WithJsonBody(System.Object)">
+            <summary>
+            Set a body which is serialised as JSON
+            </summary>
+            <param name="body">Request body</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.PactNet#IResponseBuilderV3#WithJsonBody(System.Object,Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Set a body which is serialised as JSON
+            </summary>
+            <param name="body">Request body</param>
+            <param name="settings">Custom JSON serializer settings</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.WithStatus(System.Net.HttpStatusCode)">
+            <summary>
+            Set response status code
+            </summary>
+            <param name="status">Response status code</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.WithStatus(System.UInt16)">
+            <summary>
+            Set response status code
+            </summary>
+            <param name="status">Response status code</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.WithHeader(System.String,System.String)">
+            <summary>
+            Add a response header
+            </summary>
+            <param name="key">Header key</param>
+            <param name="value">Header value</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.WithHeader(System.String,PactNet.Matchers.IMatcher)">
+            <summary>
+            Add a response header
+            </summary>
+            <param name="key">Header key</param>
+            <param name="matcher">Header value matcher</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.WithJsonBody(System.Object)">
+            <summary>
+            Set a body which is serialised as JSON
+            </summary>
+            <param name="body">Request body</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.ResponseBuilder.WithJsonBody(System.Object,Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Set a body which is serialised as JSON
+            </summary>
+            <param name="body">Request body</param>
+            <param name="settings">Custom JSON serializer settings</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="T:PactNet.Verifier.InteropVerifierProvider">
+            <summary>
+            Native pact verifier
+            </summary>
+        </member>
+        <member name="M:PactNet.Verifier.InteropVerifierProvider.Verify(System.String)">
+            <summary>
+            Verify the pact from the given args
+            </summary>
+            <param name="args">Verifier args</param>
+        </member>
+        <member name="T:PactNet.Verifier.IVerifierArguments">
+            <summary>
+            Arguments to the verifier FFI
+            </summary>
+        </member>
+        <member name="M:PactNet.Verifier.IVerifierArguments.AddOption(System.String,System.String,System.String)">
+            <summary>
+            Add an option with a value to the arguments
+            </summary>
+            <param name="option">Option name</param>
+            <param name="value">Value</param>
+            <param name="name">Name of the variable which supplied the value</param>
+            <returns>Same verifier arguments</returns>
+        </member>
+        <member name="M:PactNet.Verifier.IVerifierArguments.AddFlag(System.String)">
+            <summary>
+            Add a flag to the arguments (i.e. an option with no value)
+            </summary>
+            <param name="flag">Flag name</param>
+            <returns>Same verifier arguments</returns>
+        </member>
+        <member name="T:PactNet.Verifier.IVerifierProvider">
+            <summary>
+            Provider of the backend verification process
+            </summary>
+        </member>
+        <member name="M:PactNet.Verifier.IVerifierProvider.Verify(System.String)">
+            <summary>
+            Verify the pact from the given args
+            </summary>
+            <param name="args">Verifier args</param>
+        </member>
+        <member name="T:PactNet.Verifier.PactBrokerOptions">
+            <summary>
+            Native pact broker options
+            </summary>
+        </member>
+        <member name="M:PactNet.Verifier.PactBrokerOptions.#ctor(PactNet.Verifier.IVerifierArguments)">
+            <summary>
+            Initialises a new instance of the <see cref="T:PactNet.Verifier.PactBrokerOptions"/> class.
+            </summary>
+            <param name="verifierArgs">Pact verifier args</param>
+        </member>
+        <member name="M:PactNet.Verifier.PactBrokerOptions.BasicAuthentication(System.String,System.String)">
+            <summary>
+            Use Basic authentication with the Pact Broker
+            </summary>
+            <param name="username">Pact broker username</param>
+            <param name="password">Pact broker password</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.Verifier.PactBrokerOptions.TokenAuthentication(System.String)">
+            <summary>
+            Use Token authentication with the Pact Broker
+            </summary>
+            <param name="token">Auth token</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.Verifier.PactBrokerOptions.EnablePending">
+            <summary>
+            Enable pending pacts
+            </summary>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.Verifier.PactBrokerOptions.ConsumerTags(System.String[])">
+            <summary>
+            Consumer tag versions to retrieve
+            </summary>
+            <param name="tags">Consumer tags</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.Verifier.PactBrokerOptions.ConsumerVersionSelectors(PactNet.Verifier.ConsumerVersionSelector[])">
+            <summary>
+            Consumer version selectors to control which pacts are returned from the broker
+            </summary>
+            <param name="selectors">Consumer version selectors</param>
+            <returns>Fluent builder</returns>
+            <remarks>See <see href="https://docs.pact.io/pact_broker/advanced_topics/consumer_version_selectors"/></remarks>
+        </member>
+        <member name="M:PactNet.Verifier.PactBrokerOptions.IncludeWipPactsSince(System.DateTime)">
+            <summary>
+            Include WIP pacts since the given date
+            </summary>
+            <param name="date">WIP cut-off date</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.Verifier.PactBrokerOptions.PublishResults(System.String,System.String[])">
+            <summary>
+            Publish results to the pact broker
+            </summary>
+            <param name="providerVersion">Provider version</param>
+            <param name="tags">Optional tags to add to the verification</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="T:PactNet.Verifier.PactVerifier">
+            <summary>
+            Pact verifier
+            </summary>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifier.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="T:PactNet.Verifier.PactVerifier"/> class.
+            </summary>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifier.#ctor(PactNet.Verifier.PactVerifierConfig)">
+            <summary>
+            Initialises a new instance of the <see cref="T:PactNet.Verifier.PactVerifier"/> class.
+            </summary>
+            <param name="config">Pact verifier config</param>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifier.#ctor(PactNet.Verifier.IVerifierArguments,PactNet.Verifier.PactVerifierConfig)">
+            <summary>
+            Initialises a new instance of the <see cref="T:PactNet.Verifier.PactVerifier"/> class.
+            </summary>
+            <param name="verifierArgs">Pact verifier args</param>
+            <param name="config">Pact verifier config</param>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifier.ServiceProvider(System.String,System.Uri)">
+            <summary>
+            Set the provider details
+            </summary>
+            <param name="providerName">Name of the provider</param>
+            <param name="pactUri">URI of the running service</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifier.MessagingProvider(System.String,System.Uri,System.String)">
+            <summary>
+            Set the provider details of a messaging provider
+            </summary>
+            <param name="providerName">Name of the provider</param>
+            <param name="pactUri">URI of the running service</param>
+            <param name="basePath">Path of the messaging provider endpoint</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="T:PactNet.Verifier.PactVerifierMessagingProvider">
+            <summary>
+            Configured the messaging scenarios
+            </summary>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifierMessagingProvider.#ctor(PactNet.Verifier.IVerifierArguments,PactNet.Verifier.PactVerifierConfig)">
+            <summary>
+            Initialises a new instance of the <see cref="T:PactNet.Verifier.PactVerifierMessagingProvider"/> class.
+            </summary>
+            <param name="verifierArgs">Verifier arguments</param>
+            <param name="config">Pact verifier config</param>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifierMessagingProvider.WithProviderMessages(System.Action{PactNet.Verifier.Messaging.IMessageScenarios})">
+            <summary>
+            Configure provider messages
+            </summary>
+            <param name="scenarios">Scenario configuration</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="T:PactNet.Verifier.PactVerifierProvider">
+            <summary>
+            Native pact verifier provider type state
+            </summary>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifierProvider.#ctor(PactNet.Verifier.IVerifierArguments,PactNet.Verifier.PactVerifierConfig)">
+            <summary>
+            Initialises a new instance of the <see cref="T:PactNet.Verifier.PactVerifierProvider"/> class.
+            </summary>
+            <param name="verifierArgs">Verifier args to populate</param>
+            <param name="config">Pact verifier config</param>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifierProvider.WithFileSource(System.IO.FileInfo)">
+            <summary>
+            Verify a pact file directly
+            </summary>
+            <param name="pactFile">Pact file path</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifierProvider.WithDirectorySource(System.IO.DirectoryInfo,System.String[])">
+            <summary>
+            Verify all pacts in the given directory which match the given consumers (or all pact files if no consumers are specified)
+            </summary>
+            <param name="directory">Directory containing the pact files</param>
+            <param name="consumers">(Optional) Consumer names to filter on</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifierProvider.WithUriSource(System.Uri)">
+            <summary>
+            Verify a pact from a URI
+            </summary>
+            <param name="pactUri">Pact file URI</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifierProvider.WithPactBrokerSource(System.Uri)">
+            <summary>
+            Use the pact broker to retrieve pact files with default options
+            </summary>
+            <param name="brokerBaseUri">Base URI for the broker</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifierProvider.WithPactBrokerSource(System.Uri,System.Action{PactNet.Verifier.IPactBrokerOptions})">
+            <summary>
+            Use the pact broker to retrieve pact files
+            </summary>
+            <param name="brokerBaseUri">Base URI for the broker</param>
+            <param name="configure">Configure pact broker options</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="T:PactNet.Verifier.PactVerifierSource">
+            <summary>
+            Native pact verifier source type state
+            </summary>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifierSource.#ctor(PactNet.Verifier.IVerifierArguments,PactNet.Verifier.IVerifierProvider,PactNet.Verifier.PactVerifierConfig)">
+            <summary>
+            Initialises a new instance of the <see cref="T:PactNet.Verifier.PactVerifierSource"/> class.
+            </summary>
+            <param name="verifierArgs">Verifier args to populate</param>
+            <param name="verifier">Pact verifier provider</param>
+            <param name="config">Verifier config</param>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifierSource.WithProviderStateUrl(System.Uri)">
+            <summary>
+            Set up the provider state setup URI so the service can configure states
+            </summary>
+            <param name="providerStateUri">Provider state URI</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifierSource.WithFilter(System.String,System.String)">
+            <summary>
+            Filter the interactions to only those matching the given description and/or provider state
+            </summary>
+            <param name="description">Interaction description. All interactions are verified if this is null</param>
+            <param name="providerState">Provider state description. All provider states are verified if this is null</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifierSource.WithLogLevel(PactNet.PactLogLevel)">
+            <summary>
+            Alter the log level from the default value
+            </summary>
+            <param name="level">Log level</param>
+            <returns>Fluent builder</returns>
+        </member>
+        <member name="M:PactNet.Verifier.PactVerifierSource.Verify">
+            <summary>
+            Verify provider interactions
+            </summary>
+        </member>
+        <member name="T:PactNet.Verifier.VerifierArguments">
+            <summary>
+            Represents the arguments passed to the verifier FFI
+            </summary>
+        </member>
+        <member name="M:PactNet.Verifier.VerifierArguments.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="T:PactNet.Verifier.VerifierArguments"/> class.
+            </summary>
+        </member>
+        <member name="M:PactNet.Verifier.VerifierArguments.AddOption(System.String,System.String,System.String)">
+            <summary>
+            Add an option with a value to the arguments
+            </summary>
+            <param name="option">Option name</param>
+            <param name="value">Value</param>
+            <param name="name">Name of the variable which supplied the value</param>
+            <returns>Same verifier arguments</returns>
+        </member>
+        <member name="M:PactNet.Verifier.VerifierArguments.AddFlag(System.String)">
+            <summary>
+            Add a flag to the arguments (i.e. an option with no value)
+            </summary>
+            <param name="flag">Flag name</param>
+            <returns>Same verifier arguments</returns>
+        </member>
+        <member name="M:PactNet.Verifier.VerifierArguments.ToString">
+            <summary>Returns a string that represents the current object.</summary>
+            <returns>A string that represents the current object.</returns>
+        </member>
+    </members>
+</doc>
